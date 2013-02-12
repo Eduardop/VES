@@ -24,6 +24,11 @@
 #include "vesKiwiViewerApp.h"
 #include "vesKiwiCameraSpinner.h"
 
+@interface kwGestureDelegate : NSObject <UIGestureRecognizerDelegate>{
+
+}
+@end
+
 @implementation kwGestureDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -67,6 +72,8 @@
 
 - (BOOL) createFramebuffer;
 - (void) destroyFramebuffer;
+
+@property(strong, nonatomic) kwGestureDelegate* gestureDelegate;
 
 @end
 

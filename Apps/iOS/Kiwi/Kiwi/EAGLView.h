@@ -29,11 +29,6 @@
 @class ES2Renderer;
 struct vesKiwiViewerApp;
 
-@interface kwGestureDelegate : NSObject <UIGestureRecognizerDelegate>{
-    
-}
-@end
-
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
 // Note that setting the view non-opaque will only work if the EAGL surface has an alpha channel.
@@ -88,7 +83,6 @@ struct vesKiwiViewerApp;
 - (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)sender;
 - (IBAction)handle2DRotationGesture:(UIRotationGestureRecognizer *)sender;
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)sender;
-@property(strong, nonatomic) kwGestureDelegate* gestureDelegate;
 
 // model information
 - (int)getNumberOfFacetsForCurrentModel;
