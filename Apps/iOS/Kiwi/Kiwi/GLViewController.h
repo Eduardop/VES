@@ -26,11 +26,11 @@
 
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *infoButton;
-@property (nonatomic, retain) IBOutlet UIButton *loadButton;
+@property (nonatomic, strong) IBOutlet UIButton *infoButton;
+@property (nonatomic, strong) IBOutlet UIButton *loadButton;
 
 
-@property (nonatomic, retain) UIPopoverController *infoPopover;
-@property (nonatomic, retain) UIPopoverController *loadPopover;
+@property (nonatomic, strong) UIPopoverController *infoPopover;
+@property (nonatomic, strong) UIPopoverController *loadPopover;
 
 @end

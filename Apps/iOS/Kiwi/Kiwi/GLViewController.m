@@ -28,15 +28,6 @@
 @synthesize infoButton;
 @synthesize loadButton;
 
-- (void)dealloc
-{
-  [self->infoButton release];
-  [self->loadButton release];
-  [self->infoPopover release];
-  [self->loadPopover release];
-  [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.

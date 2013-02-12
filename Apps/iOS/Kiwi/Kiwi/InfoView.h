@@ -24,8 +24,8 @@
   UILabel *modelInfoLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *modelInfoLabel;
-@property (nonatomic, retain) IBOutlet UIView *contentView;
+@property (nonatomic, strong) IBOutlet UILabel *modelInfoLabel;
+@property (nonatomic, strong) IBOutlet UIView *contentView;
 
 
 -(void)updateModelInfoLabelWithNumFacets:(int)numFacets

@@ -41,7 +41,6 @@
   self.exampleData = nil;
   self.helpStrings = nil;
   self.delegate = nil;
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,7 +134,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 
     // Configure the cell...

@@ -24,11 +24,6 @@
 #include "vesKiwiViewerApp.h"
 #include "vesKiwiCameraSpinner.h"
 
-@interface kwGestureDelegate : NSObject <UIGestureRecognizerDelegate>{
-
-}
-@end
-
 @implementation kwGestureDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -78,6 +73,7 @@
 @implementation EAGLView
 
 @synthesize context;
+@synthesize gestureDelegate = _gestureDelegate;
 
 // You must implement this method
 + (Class)layerClass
@@ -100,7 +96,6 @@
     context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (!context || ![EAGLContext setCurrentContext:context])
       {
-      [self release];
       return nil;
       }
 
@@ -109,7 +104,6 @@
 
     if (!renderer)
       {
-      [self release];
       return nil;
       }
 
@@ -308,11 +302,7 @@
     {
     [EAGLContext setCurrentContext:nil];
     }
-  [context release];
   context = nil;
-  [renderer release];
-  [renderDataMutex release];
-  [super dealloc];
 }
 
 - (void)resetView
@@ -337,24 +327,20 @@
   [singleFingerPanGesture setMinimumNumberOfTouches:1];
   [singleFingerPanGesture setMaximumNumberOfTouches:1];
   [self addGestureRecognizer:singleFingerPanGesture];
-  [singleFingerPanGesture release];
 
   UIPanGestureRecognizer *doubleFingerPanGesture = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(handleDoubleFingerPanGesture:)];
   [doubleFingerPanGesture setMinimumNumberOfTouches:2];
   [doubleFingerPanGesture setMaximumNumberOfTouches:2];
   [self addGestureRecognizer:doubleFingerPanGesture];
-  [doubleFingerPanGesture release];
 
   UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc]
                                             initWithTarget:self action:@selector(handlePinchGesture:)];
   [self addGestureRecognizer:pinchGesture];
-  [pinchGesture release];
 
   UIRotationGestureRecognizer *rotate2DGesture = [[UIRotationGestureRecognizer alloc]
                                                   initWithTarget:self action:@selector(handle2DRotationGesture:)];
   [self addGestureRecognizer:rotate2DGesture];
-  [rotate2DGesture release];
 
   UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]
                                              initWithTarget:self action:@selector(handleTapGesture:)];
@@ -364,14 +350,12 @@
   //tapGesture.cancelsTouchesInView = NO;
   tapGesture.numberOfTapsRequired = 1;
   [self addGestureRecognizer:tapGesture];
-  [tapGesture release];
 
   UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc]
                                              initWithTarget:self action:@selector(handleDoubleTapGesture:)];
   //doubleTapGesture.cancelsTouchesInView = NO;
   doubleTapGesture.numberOfTapsRequired = 2;
   [self addGestureRecognizer:doubleTapGesture];
-  [doubleTapGesture release];
 
   [tapGesture requireGestureRecognizerToFail:doubleTapGesture];
 
@@ -379,17 +363,16 @@
   UILongPressGestureRecognizer* longPress = [[UILongPressGestureRecognizer alloc]
                                               initWithTarget:self action:@selector(handleLongPress:)];
   [self addGestureRecognizer:longPress];
-  [longPress release];
 
   //
   // allow two-finger gestures to work simultaneously
-  kwGestureDelegate* gestureDelegate = [[kwGestureDelegate alloc] init];
-  [rotate2DGesture setDelegate:gestureDelegate];
-  [pinchGesture setDelegate:gestureDelegate];
-  [doubleFingerPanGesture setDelegate:gestureDelegate];
+  self.gestureDelegate = [[kwGestureDelegate alloc] init];
+  [rotate2DGesture setDelegate:self.gestureDelegate];
+  [pinchGesture setDelegate:self.gestureDelegate];
+  [doubleFingerPanGesture setDelegate:self.gestureDelegate];
 
-  [tapGesture setDelegate:gestureDelegate];
-  [doubleTapGesture setDelegate:gestureDelegate];
+  [tapGesture setDelegate:self.gestureDelegate];
+  [doubleTapGesture setDelegate:self.gestureDelegate];
 }
 
 - (IBAction)handleDoubleFingerPanGesture:(UIPanGestureRecognizer *)sender

@@ -37,11 +37,11 @@
   UIPopoverController *_loadDataPopover;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet EAGLView *glView;
-@property (nonatomic, retain) IBOutlet GLViewController *viewController;
-@property (nonatomic, retain) LoadDataController *dataLoader;
-@property (nonatomic, retain) UIPopoverController *loadDataPopover;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet EAGLView *glView;
+@property (nonatomic, strong) IBOutlet GLViewController *viewController;
+@property (nonatomic, strong) LoadDataController *dataLoader;
+@property (nonatomic, strong) UIPopoverController *loadDataPopover;
 
 -(IBAction)reset:(UIButton*)sender;
 -(IBAction)information:(UIButton*)sender;

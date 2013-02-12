@@ -48,12 +48,6 @@
 - (void)dealloc
 {
   self.loadDataPopover = nil;
-
-  [window release];
-  [glView release];
-  [viewController release];
-  [_dataLoader release];
-  [super dealloc];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -75,7 +69,7 @@
 
 -(IBAction)information:(UIButton*)sender
 {
-  InfoView *infoView = [[[InfoView alloc] initWithFrame:CGRectMake(0,0,320,260)] autorelease];
+  InfoView *infoView = [[InfoView alloc] initWithFrame:CGRectMake(0,0,320,260)];
 
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     {
@@ -159,7 +153,6 @@
     return;
   }
   [self->waitDialog dismissWithClickedButtonIndex:0 animated:YES];
-  [self->waitDialog release];
   self->waitDialog = nil;
 }
 
@@ -216,8 +209,8 @@
 - (void)willPresentAlertView:(UIAlertView *)alertView
 {
   if (alertView == self->waitDialog) {
-   UIActivityIndicatorView *indicator = [[[UIActivityIndicatorView alloc]
-    initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge] autorelease];
+   UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]
+    initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   indicator.center = CGPointMake(alertView.bounds.size.width / 2, alertView.bounds.size.height - 50);
   [alertView addSubview:indicator];
   [indicator startAnimating];
@@ -257,7 +250,6 @@
                         cancelButtonTitle:@"Ok"
                         otherButtonTitles: nil, nil];
   [alert show];
-  [alert release];
 }
 
 -(void)dismissLoadDataView
@@ -302,8 +294,8 @@
       }
     else
       {
-      self.loadDataPopover = [[[UIPopoverController alloc]
-                               initWithContentViewController:_dataLoader] autorelease];
+      self.loadDataPopover = [[UIPopoverController alloc]
+                               initWithContentViewController:_dataLoader];
       }
     }
 

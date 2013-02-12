@@ -67,7 +67,6 @@
 - (void)dealloc
 {
   delete self->mApp;
-  [super dealloc];
 }
 
 - (void)resetView

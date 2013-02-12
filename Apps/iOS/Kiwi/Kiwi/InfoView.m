@@ -39,14 +39,6 @@
     return self;
 }
 
-- (void)dealloc;
-{
-    [contentView release];
-    [modelInfoLabel release];
-    [super dealloc];
-}
-
-
 -(IBAction)kitwareDotCom:(UIButton*)sender
 {
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.kitware.com"]];

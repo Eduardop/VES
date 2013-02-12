@@ -27,10 +27,9 @@
 @interface LoadDataController : UITableViewController {
   NSMutableArray *_exampleData;
   NSMutableArray *_helpStrings;
-  id<LoadDataDelegate> _delegate;
 }
 
-@property (nonatomic, retain) NSMutableArray *exampleData;
-@property (nonatomic, retain) NSMutableArray *helpStrings;
-@property (nonatomic, assign) id<LoadDataDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *exampleData;
+@property (nonatomic, strong) NSMutableArray *helpStrings;
+@property (nonatomic, weak) id<LoadDataDelegate> delegate;
 @end

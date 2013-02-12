@@ -24,9 +24,9 @@
 
 }
 
-@property (nonatomic, retain) IBOutlet UIView *containerView;
-@property (nonatomic, retain) IBOutlet UIViewController *previousViewController;
-@property (nonatomic, retain) IBOutlet UINavigationItem *titleItem;
+@property (nonatomic, strong) IBOutlet UIView *containerView;
+@property (nonatomic, strong) IBOutlet UIViewController *previousViewController;
+@property (nonatomic, strong) IBOutlet UINavigationItem *titleItem;
 
 
 -(IBAction)dismissModalView:(id)sender;
