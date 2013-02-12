@@ -166,14 +166,14 @@
     }
     else if (indexPath.section == 1) {
       NSString *label = [_helpStrings objectAtIndex:indexPath.row];
-      if (label == @"from the web.") {
+      if ([label isEqual: @"from the web."]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://kitware.com/kiwiviewer/help/documentation.html"]];
       }
-      else if (label == @"from DropBox.") {
+      else if ([label isEqual: @"from DropBox."]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://kitware.com/kiwiviewer/help/documentation.html#dropbox"]];
 
       }
-      else if (label == @"from email.") {
+      else if ([label isEqual: @"from email."]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://kitware.com/kiwiviewer/help/documentation.html#email"]];
       }
     }
